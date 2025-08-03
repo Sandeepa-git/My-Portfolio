@@ -47,7 +47,8 @@ export const projectsData = [
     technologies: ['Python', 'Flask', 'HTML', 'CSS', 'Javascript'],
     links: {
       preview: 'https://socialhub-ms.vercel.app/',
-      github: 'https://github.com/Sandeepa-git/Introvert-vs.-Extrovert-Classifier-using-ML',
+      github:
+        'https://github.com/Sandeepa-git/Introvert-vs.-Extrovert-Classifier-using-ML',
     },
   },
   {
@@ -57,12 +58,12 @@ export const projectsData = [
       'A modern event website for CloudSpace, built with Next.js, TypeScript, Tailwind CSS, and Supabase.',
     technologies: ['Next.js', 'TypeScript', 'Tailwind', 'Supabase'],
     links: {
-      preview: 'https://vercel.com/sandeepas-projects-4167a1da/cloud-space-event-website-5eod/CS8j1EQz6tvMTtV4McUrRzTc5QL4',
+      preview:
+        'https://vercel.com/sandeepas-projects-4167a1da/cloud-space-event-website-5eod/CS8j1EQz6tvMTtV4McUrRzTc5QL4',
       github: 'https://github.com/Sandeepa-git/cloudspace-event-website',
     },
   },
 ] as const;
-
 
 export const experiencesData = [
   {
@@ -97,7 +98,9 @@ export const experiencesData = [
         >
           cloudspacev1.0
         </Link>{' '}
-        website This opportunity advanced my skills in Next.js, React, TypeScript, and Tailwind while sharpening my leadership and project management capabilities.
+        website This opportunity advanced my skills in Next.js, React,
+        TypeScript, and Tailwind while sharpening my leadership and project
+        management capabilities.
       </>
     ),
     period: '2024 - present',

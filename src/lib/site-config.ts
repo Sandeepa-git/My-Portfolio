@@ -26,6 +26,7 @@ export const siteConfig = {
     'Programming',
     'Tech enthusiast',
   ],
-  url: env.SITE_URL || 'https://www.linkedin.com/in/sandeepa-vimukthi-92ab0a277/',
+  url:
+    env.SITE_URL || 'https://www.linkedin.com/in/sandeepa-vimukthi-92ab0a277/',
   googleSiteVerificationId: env.GOOGLE_SITE_VERIFICATION_ID || '',
 };
