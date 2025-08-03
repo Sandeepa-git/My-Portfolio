@@ -1,14 +1,28 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 
 import { Button } from '@/components/button';
 import { Icons } from '@/components/icons';
 import { useSectionInView } from '@/hooks/use-section-in-view';
 
-const roles = ['Frontend Developer', 'React Enthusiast', 'Next.js Expert'];
+const roles = [
+  'Frontend Developer',
+  'React Enthusiast',
+  'Next.js Expert',
+  'Cloud Computing Undergraduate',
+];
+
+const roleDescriptions: Record<string, string> = {
+  'Frontend Developer': 'creating modern web apps.',
+  'React Enthusiast': 'building interactive UI experiences.',
+  'Next.js Expert': 'crafting fast server-rendered apps.',
+  'Cloud Computing Undergraduate': 'working on scalable cloud solutions.',
+};
+
+const cloudTechnologies = ['AWS', 'Docker', 'Kubernetes'];
 
 export const Intro = () => {
   const { ref } = useSectionInView('Home');
@@ -41,17 +55,30 @@ export const Intro = () => {
         className="font-heading max-w-3xl text-4xl font-extrabold md:text-5xl"
       >
         Hi I&#39;m a{' '}
-        <motion.span
-          key={roles[currentIndex]}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-          className="bg-gradient-to-r from-yellow-400 to-orange-600 bg-clip-text text-transparent"
-        >
-          {roles[currentIndex]}
-        </motion.span>{' '}
-        creating modern web apps.
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={roles[currentIndex]}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className="bg-gradient-to-r from-yellow-400 to-orange-600 bg-clip-text text-transparent"
+          >
+            {roles[currentIndex]}
+          </motion.span>
+        </AnimatePresence>{' '}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={roleDescriptions[roles[currentIndex]]}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className="inline-block"
+          >
+            {roleDescriptions[roles[currentIndex]]}
+          </motion.span>
+        </AnimatePresence>
       </motion.h1>
 
       <motion.p
@@ -62,8 +89,20 @@ export const Intro = () => {
         }}
         className="text-muted-foreground max-w-xl"
       >
-        A frontend developer based in Sri Lanka. I&#39;m passionate about
+        A frontend developer based in Sri Lanka and a cloud computing undergraduate. I&#39;m passionate about
         building modern web applications using Next.js, React, and Tailwind CSS.
+      </motion.p>
+
+      <motion.p
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 0.2,
+        }}
+        className="text-muted-foreground max-w-xl"
+      >
+        Familiar with cloud technologies like{' '}
+        <span className="font-semibold">{cloudTechnologies.join(', ')}</span>.
       </motion.p>
 
       <div className="flex flex-row flex-wrap justify-center gap-2">
