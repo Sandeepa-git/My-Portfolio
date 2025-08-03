@@ -19,7 +19,7 @@ const roleDescriptions: Record<string, string> = {
   'Frontend Developer': 'creating modern web apps.',
   'React Enthusiast': 'building interactive UI experiences.',
   'Next.js Expert': 'crafting fast server-rendered apps.',
-  'Cloud Computing Undergraduate': 'working on scalable cloud solutions.',
+  'Cloud Computing Undergraduate': 'Building scalable and resilient cloud solutions.',
 };
 
 const cloudTechnologies = ['AWS', 'Docker', 'Kubernetes'];
