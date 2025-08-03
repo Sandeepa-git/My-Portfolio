@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 
 import { Button } from '@/components/button';
@@ -19,7 +19,8 @@ const roleDescriptions: Record<string, string> = {
   'Frontend Developer': 'creating modern web apps.',
   'React Enthusiast': 'building interactive UI experiences.',
   'Next.js Expert': 'crafting fast server-rendered apps.',
-  'Cloud Computing Undergraduate': 'Building scalable and resilient cloud solutions.',
+  'Cloud Computing Undergraduate':
+    'Building scalable and resilient cloud solutions.',
 };
 
 const cloudTechnologies = ['AWS', 'Docker', 'Kubernetes'];
@@ -89,8 +90,9 @@ export const Intro = () => {
         }}
         className="text-muted-foreground max-w-xl"
       >
-        A frontend developer based in Sri Lanka and a cloud computing undergraduate. I&#39;m passionate about
-        building modern web applications using Next.js, React, and Tailwind CSS.
+        A frontend developer based in Sri Lanka and a cloud computing
+        undergraduate. I&#39;m passionate about building modern web applications
+        using Next.js, React, and Tailwind CSS.
       </motion.p>
 
       <motion.p
