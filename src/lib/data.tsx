@@ -84,7 +84,7 @@ export const experiencesData = [
   },
   {
     title: 'Frontend developer',
-    company: 'IEEE Computer Society of SLTC',
+    company: 'IEEE Computer Society, Sri Lanka Technology Campus',
     description: (
       <>
         Build{' '}
