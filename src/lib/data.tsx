@@ -71,7 +71,7 @@ export const experiencesData = [
     company: 'Sri Lanka Technology Campus',
     description:
       'Currently completing a B.Sc. Honours in Cloud Computing with emphasis on cloud technologies, DevOps practices, and cybersecurity. Actively developing skills through practical projects and collaborative teamwork.',
-    period: '2024-2028',
+    period: '2024 - Present',
     technologies: ['AWS', 'Docker', 'Kubernets', 'Python', 'Git', 'CI/CD'],
   },
   {
@@ -93,7 +93,7 @@ export const experiencesData = [
             buttonVariants({ variant: 'link' }),
             'm-0 h-fit p-0 text-base'
           )}
-          href="https://vercel.com/sandeepas-projects-4167a1da/cloud-space-event-website-5eod/CS8j1EQz6tvMTtV4McUrRzTc5QL4"
+          href="https://cloud-space-event-website-5eod-sandeepas-projects-4167a1da.vercel.app/"
           target="_blank"
         >
           cloudspacev1.0
