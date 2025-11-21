@@ -3,7 +3,7 @@ My Personal Portfolio
 Welcome to my personal portfolio. This website showcases my projects, skills, and professional journey in web development and cloud technologies.
 
 ## About Me
-Hi, I'm Ta, a Full-Stack Developer with experience in React, Node.js, TypeScript, Next.js, and Azure cloud deployments. I focus on building modern, responsive, and interactive web applications, and deploying them using CI/CD pipelines on platforms like Azure DevOps.
+Hi, I'm Saneepa Wimalasiri, a Full-Stack Developer with experience in React, Node.js, TypeScript, Next.js, and Azure cloud deployments. I focus on building modern, responsive, and interactive web applications, and deploying them using CI/CD pipelines on platforms like Azure DevOps.
 
 ## Skills
 - Frontend: React, Next.js, TypeScript, HTML, CSS, Tailwind  
