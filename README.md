@@ -1,5 +1,4 @@
-
-# Ta's Personal Portfolio
+My Personal Portfolio
 
 Welcome to my personal portfolio. This website showcases my projects, skills, and professional journey in web development and cloud technologies.
 
