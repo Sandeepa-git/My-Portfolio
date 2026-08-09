@@ -825,3 +825,28 @@ textarea.form-input {
 .btn-submit:hover {
   background-color: var(--text-color-muted);
 }
+
+@media (max-width: 991px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .home-blob {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .availability-badge {
+    font-size: 0.9rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    gap: 8px;
+  }
+  
+  .availability-indicator {
+    margin-top: 0;
+    margin-right: 0;
+  }
+}
