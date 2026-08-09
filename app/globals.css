@@ -334,13 +334,26 @@ button {
   position: relative;
 }
 
+@keyframes profile-animate {
+  0% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+}
+
 .home-blob {
   width: 320px;
   height: 320px;
   overflow: hidden;
-  border-radius: 50%;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   border: 4px solid var(--border-color);
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  animation: profile-animate 8s ease-in-out infinite;
 }
 
 .home-blob img {
