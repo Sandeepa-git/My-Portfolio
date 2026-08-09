@@ -91,6 +91,7 @@ export default function Portfolio() {
               <img 
                 src={project.image} 
                 alt={project.title} 
+                loading="lazy"
                 style={project.isLogo ? { objectFit: 'contain', padding: '1rem' } : {}}
               />
             </div>

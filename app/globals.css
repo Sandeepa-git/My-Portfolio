@@ -834,6 +834,9 @@ textarea.form-input {
   .home-blob {
     width: 220px;
     height: 220px;
+    animation: none; /* Disable heavy animation on mobile */
+    border-radius: 50%; /* Make it a static circle on mobile */
+    box-shadow: none; /* Remove expensive box-shadow on mobile */
   }
   
   .availability-badge {

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 const Typewriter = ({ texts, typingSpeed = 100, deletingSpeed = 50, pauseTime = 2000 }) => {
@@ -89,9 +90,13 @@ export default function Home() {
     <div className="home-container">
       <div className="home-image-container">
         <div className="home-blob">
-          <img 
+          <Image 
             src="/DSC00078.jpg" 
             alt="Sandeepa Wimalasiri" 
+            width={320}
+            height={320}
+            priority
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
         </div>
       </div>
@@ -108,7 +113,7 @@ export default function Home() {
             ]} />
           </span>
           <a href="https://mvp.microsoft.com/en-US/studentambassadors/profile/b3b04af9-2237-4437-834d-ba28cef3ea1c" target="_blank" rel="noreferrer" style={{ display: 'inline-block' }}>
-            <img src="/image.png_2K_202608082345.jpeg" alt="Microsoft Student Ambassador Associate" className="ms-badge" />
+            <Image src="/image.png_2K_202608082345.jpeg" alt="Microsoft Student Ambassador Associate" className="ms-badge" width={80} height={80} />
           </a>
         </div>
 

@@ -49,7 +49,7 @@ export default function Articles() {
         {articles.map((article, index) => (
           <a href={article.link} target="_blank" rel="noreferrer" className="project-card" key={index}>
             <div className="project-image">
-              <img src={article.image} alt={article.title} />
+              <img src={article.image} alt={article.title} loading="lazy" />
             </div>
             <div className="project-content">
               <h3>{article.title}</h3>
