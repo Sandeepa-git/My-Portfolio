@@ -1,6 +1,5 @@
 import './globals.css';
 import Sidebar from '@/components/Sidebar';
-import ThemeToggle from '@/components/ThemeToggle';
 
 export const metadata = {
   title: 'Sandeepa Wimalasiri | Portfolio',
@@ -16,9 +15,9 @@ export default function RootLayout({ children }) {
           <main className="main-content">
             {children}
           </main>
-          <ThemeToggle />
         </div>
       </body>
     </html>
   );
 }
+

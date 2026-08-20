@@ -1,6 +1,7 @@
 "use client";
 
-import { Phone, Mail, MapPin, MessageCircle } from 'lucide-react';
+import { useState } from 'react';
+import { Phone, Mail, MapPin, Copy, Check, Clock, Lock } from 'lucide-react';
 
 const WhatsAppIcon = ({ size }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -8,56 +9,83 @@ const WhatsAppIcon = ({ size }) => (
   </svg>
 );
 
-
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
+  const emailAddress = "agsvwimalasiri@gmail.com";
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(emailAddress);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  };
+
   return (
-    <div>
-      <h1 className="section-title">Get in Touch</h1>
-      
-      <div className="contact-container">
-        <div className="contact-item">
-          <div className="contact-icon">
-            <Phone size={24} />
+    <div className="content-frame" style={{ maxWidth: '640px', margin: '0 auto' }}>
+      <header style={{ marginBottom: '3rem', textAlign: 'center' }}>
+        <h1 className="section-title">Get in Touch</h1>
+        <p className="section-subtitle" style={{ margin: '0 auto 1.5rem auto' }}>
+          Have a project, opportunity, or technical question? Feel free to reach out directly through my contact channels.
+        </p>
+      </header>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        {/* Email card with copy feedback */}
+        <div className="contact-card-item">
+          <div className="contact-card-icon" aria-hidden="true">
+            <Mail size={20} />
           </div>
-          <div className="contact-details">
-            <h3>Phone</h3>
-            <p>+94 750997715</p>
+          <div className="contact-card-details" style={{ flex: 1 }}>
+            <h4>Email Address</h4>
+            <a href={`mailto:${emailAddress}`}>{emailAddress}</a>
           </div>
+          <button 
+            onClick={handleCopyEmail}
+            className="filter-chip"
+            style={{ padding: '0.4rem 0.8rem', display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.8rem' }}
+            aria-label="Copy email address to clipboard"
+          >
+            {copied ? <Check size={14} style={{ color: 'var(--accent-color)' }} /> : <Copy size={14} />}
+            <span>{copied ? "Copied" : "Copy"}</span>
+          </button>
         </div>
 
-        <div className="contact-item">
-          <div className="contact-icon">
-            <Mail size={24} />
+        {/* WhatsApp direct card */}
+        <div className="contact-card-item">
+          <div className="contact-card-icon whatsapp" aria-hidden="true">
+            <WhatsAppIcon size={20} />
           </div>
-          <div className="contact-details">
-            <h3>Email</h3>
-            <a href="mailto:agsvwimalasiri@gmail.com">agsvwimalasiri@gmail.com</a>
-          </div>
-        </div>
-
-        <div className="contact-item">
-          <div className="contact-icon">
-            <MapPin size={24} />
-          </div>
-          <div className="contact-details">
-            <h3>Location</h3>
-            <p>Meepe, Western Province, Sri Lanka</p>
-          </div>
-        </div>
-
-        <div className="contact-item">
-          <div className="contact-icon" style={{ backgroundColor: '#25D366', borderColor: '#25D366', color: 'white' }}>
-            <WhatsAppIcon size={24} />
-          </div>
-          <div className="contact-details">
-            <h3>WhatsApp</h3>
-            <a href="https://wa.me/94750997715" target="_blank" rel="noreferrer" style={{ fontWeight: 'bold', color: '#25D366' }}>
+          <div className="contact-card-details">
+            <h4>WhatsApp Direct</h4>
+            <a href="https://wa.me/94750997715" target="_blank" rel="noreferrer" style={{ fontWeight: '600', color: '#25D366' }}>
               Chat with me directly
             </a>
           </div>
         </div>
 
+        {/* Location & Time Zone Card */}
+        <div className="contact-card-item">
+          <div className="contact-card-icon" aria-hidden="true">
+            <MapPin size={20} />
+          </div>
+          <div className="contact-card-details">
+            <h4>Location &amp; Time Zone</h4>
+            <p>Meepe, Western Province, Sri Lanka</p>
+            <p style={{ fontSize: '0.75rem', marginTop: '0.25rem' }}>GMT+5:30 (India Standard Time)</p>
+          </div>
+        </div>
+      </div>
 
+      <div style={{ marginTop: '3rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.825rem', color: 'var(--text-color-muted)' }}>
+          <Clock size={14} style={{ color: 'var(--accent-color)' }} />
+          <span>Response expectation: I typically respond within 24 hours.</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.825rem', color: 'var(--text-color-muted)' }}>
+          <Lock size={14} style={{ color: 'var(--accent-color)' }} />
+          <span>Privacy notice: Your coordinates are strictly confidential.</span>
+        </div>
       </div>
     </div>
   );

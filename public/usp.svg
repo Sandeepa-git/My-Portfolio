@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="usp-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5" />
+      <stop offset="50%" stop-color="#2563EB" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#usp-grad)" />
+  <rect width="100%" height="100%" fill="url(#grid)" />
+  
+  <!-- Content -->
+  <g transform="translate(100, 100)" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Eiffel + Book combo/symbol -->
+    <path d="M12 2L2 28h20L12 2z" stroke-width="2" />
+    <path d="M5 22h14M8 14h8" stroke-width="2" />
+    <circle cx="12" cy="10" r="1.5" fill="white" />
+  </g>
+  
+  <text x="100" y="360" fill="white" font-family="system-ui, sans-serif" font-size="44" font-weight="800" letter-spacing="-1">Ukrainian School of Paris</text>
+  <text x="100" y="410" fill="rgba(255, 255, 255, 0.7)" font-family="system-ui, sans-serif" font-size="20" font-weight="500">Language &amp; Cultural Education Academy</text>
+</svg>
