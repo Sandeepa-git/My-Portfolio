@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from 'react';
-import { Phone, Mail, MapPin, Copy, Check, Clock, Lock } from 'lucide-react';
+import { Mail, MapPin, Clock, Lock } from 'lucide-react';
 
 const WhatsAppIcon = ({ size }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -10,16 +9,7 @@ const WhatsAppIcon = ({ size }) => (
 );
 
 export default function Contact() {
-  const [copied, setCopied] = useState(false);
   const emailAddress = "agsvwimalasiri@gmail.com";
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(emailAddress);
-    setCopied(true);
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000);
-  };
 
   return (
     <div className="content-frame" style={{ maxWidth: '640px', margin: '0 auto' }}>
@@ -31,7 +21,7 @@ export default function Contact() {
       </header>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-        {/* Email card with copy feedback */}
+        {/* Email card */}
         <div className="contact-card-item">
           <div className="contact-card-icon" aria-hidden="true">
             <Mail size={20} />
@@ -40,15 +30,6 @@ export default function Contact() {
             <h4>Email Address</h4>
             <a href={`mailto:${emailAddress}`}>{emailAddress}</a>
           </div>
-          <button 
-            onClick={handleCopyEmail}
-            className="filter-chip"
-            style={{ padding: '0.4rem 0.8rem', display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.8rem' }}
-            aria-label="Copy email address to clipboard"
-          >
-            {copied ? <Check size={14} style={{ color: 'var(--accent-color)' }} /> : <Copy size={14} />}
-            <span>{copied ? "Copied" : "Copy"}</span>
-          </button>
         </div>
 
         {/* WhatsApp direct card */}

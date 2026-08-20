@@ -79,7 +79,7 @@ export default function About() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', marginBottom: '4rem' }}>
         {/* Left column: Education & Experience */}
         <section aria-label="Education & Professional Experience">
-          <h2 className="skills-category-title" style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>
+          <h2 className="skills-category-title">
             Education &amp; Experience
           </h2>
           
@@ -121,7 +121,7 @@ export default function About() {
 
         {/* Right column: Leadership & Community */}
         <section aria-label="Community Leadership & Involvement">
-          <h2 className="skills-category-title" style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>
+          <h2 className="skills-category-title">
             Leadership &amp; Community
           </h2>
 
@@ -183,7 +183,7 @@ export default function About() {
 
       {/* Technical Skills Capability Groups */}
       <section className="about-section" aria-labelledby="skills-heading">
-        <h2 id="skills-heading" className="skills-category-title" style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>
+        <h2 id="skills-heading" className="skills-category-title">
           Technical Skills &amp; Capabilities
         </h2>
         

@@ -118,7 +118,7 @@ export default function Articles() {
       {/* Featured Article Highlight Banner */}
       {featuredArticle && activeFilter === 'all' && (
         <section style={{ marginBottom: '5rem' }} aria-labelledby="featured-article-heading">
-          <h2 id="featured-article-heading" className="skills-category-title" style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>
+          <h2 id="featured-article-heading" className="skills-category-title">
             Featured Article
           </h2>
           <div className="featured-article-banner">
@@ -163,7 +163,7 @@ export default function Articles() {
 
       {/* Articles Grid & Category Filters */}
       <section aria-labelledby="articles-archive-heading">
-        <h2 id="articles-archive-heading" className="skills-category-title" style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>
+        <h2 id="articles-archive-heading" className="skills-category-title">
           Article Library
         </h2>
 

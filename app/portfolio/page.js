@@ -193,7 +193,7 @@ export default function Portfolio() {
 
       {/* Featured Case Studies at Top */}
       <section style={{ marginBottom: '5rem' }} aria-labelledby="case-studies-heading">
-        <h2 id="case-studies-heading" className="skills-category-title" style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>
+        <h2 id="case-studies-heading" className="skills-category-title">
           Featured Case Studies
         </h2>
         <div className="project-grid">
@@ -205,7 +205,7 @@ export default function Portfolio() {
 
       {/* Projects Grid Section with Filters */}
       <section aria-labelledby="all-projects-heading">
-        <h2 id="all-projects-heading" className="skills-category-title" style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>
+        <h2 id="all-projects-heading" className="skills-category-title">
           All Works &amp; Archive
         </h2>
 

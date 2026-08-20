@@ -109,7 +109,14 @@ export default function Sidebar() {
         aria-hidden={!isOpen && typeof window !== 'undefined' && window.innerWidth <= 991}
       >
         <div className="sidebar-header">
-          <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%', marginBottom: '1.5rem' }}>
+          <div className="sidebar-header-actions">
+            <button 
+              className="mobile-close-btn"
+              onClick={() => setIsOpen(false)}
+              aria-label="Close navigation menu"
+            >
+              <X size={20} />
+            </button>
             <ThemeToggle />
           </div>
           
