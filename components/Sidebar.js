@@ -150,6 +150,7 @@ export default function Sidebar() {
       >
         <div className="sidebar-header">
           <div className="sidebar-header-actions">
+            <ThemeToggle />
             <button 
               className="mobile-close-btn"
               onClick={() => setIsOpen(false)}
@@ -157,7 +158,6 @@ export default function Sidebar() {
             >
               <X size={20} />
             </button>
-            <ThemeToggle />
           </div>
           
           <div className="sidebar-avatar-container">
