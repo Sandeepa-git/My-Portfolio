@@ -112,7 +112,10 @@ export function Stack() {
       <div className="stack-grid">
         {stack.map((s) => (
           <div key={s.name} className="stack-item" data-reveal>
-            <span className="stack-mark" aria-hidden="true">{s.mark}</span>
+            <span className="stack-mark" aria-hidden="true">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={s.icon} alt="" width={30} height={30} loading="lazy" />
+            </span>
             <div>
               <h3>{s.name}</h3>
               <p>{s.note}</p>
