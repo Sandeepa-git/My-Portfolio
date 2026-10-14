@@ -22,11 +22,27 @@ export const metadata = {
   alternates: { canonical: '/' },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
   title: {
-    default: 'Sandeepa Wimalasiri | Cloud & Full-Stack Engineer',
+    default: 'Sandeepa Wimalasiri | Freelance Web Developer & Cloud Engineer, Sri Lanka',
     template: '%s | Sandeepa Wimalasiri',
   },
-  description: 'Portfolio of Sandeepa Wimalasiri, Cloud Computing undergraduate and Associate Microsoft Student Ambassador building cloud infrastructure, APIs and web applications.',
-  keywords: ['Sandeepa Wimalasiri', 'Sandeepa', 'Sandeepa Vimukthi', 'Sandeepa Wimalasiri portfolio', 'Microsoft Student Ambassador', 'Kubernetes', 'Cloud Engineer', 'Azure', 'DevOps', 'Full-Stack Developer', 'Sri Lanka', 'Portfolio'],
+  description: 'Sandeepa Wimalasiri is a freelance cloud engineer and web developer in Sri Lanka. Hire me for website design and development, Azure and AWS cloud setup, DevOps, CI/CD, APIs and Flutter mobile apps.',
+  keywords: [
+    // Name
+    'Sandeepa Wimalasiri', 'Sandeepa', 'Sandeepa Vimukthi', 'Sandeepa Wimalasiri portfolio',
+    // Hiring intent
+    'hire web developer', 'freelance web developer', 'freelance cloud engineer', 'hire DevOps engineer',
+    'website developer for small business', 'affordable website design', 'business website development',
+    'school website development', 'landing page developer', 'Next.js developer', 'React developer',
+    'Node.js API developer', 'Flutter app developer', 'mobile app developer',
+    // Cloud & DevOps services
+    'Azure cloud engineer', 'AWS cloud setup', 'cloud migration', 'DevOps consultant', 'CI/CD pipeline setup',
+    'Docker and Kubernetes', 'Infrastructure as Code', 'Azure Bicep', 'Jenkins pipeline',
+    // Location
+    'web developer Sri Lanka', 'freelance web developer Sri Lanka', 'cloud engineer Sri Lanka',
+    'DevOps engineer Sri Lanka', 'web design Colombo', 'remote developer Sri Lanka',
+    // Profile
+    'Microsoft Student Ambassador', 'Full-Stack Developer', 'Cloud Engineer portfolio',
+  ],
   authors: [{ name: 'Sandeepa Wimalasiri', url: SITE_URL }],
   creator: 'Sandeepa Wimalasiri',
   openGraph: {
@@ -35,7 +51,7 @@ export const metadata = {
     siteName: 'Sandeepa Wimalasiri',
     locale: 'en_US',
     title: 'Sandeepa Wimalasiri | Cloud & Full-Stack Engineer',
-    description: 'Cloud infrastructure and full-stack developer building reliable digital products.',
+    description: 'Freelance cloud engineer and web developer in Sri Lanka: websites, cloud setup, DevOps, APIs and mobile apps.',
     images: [{ url: '/DSC00078.jpg', alt: 'Sandeepa Wimalasiri' }],
   },
   twitter: { card: 'summary_large_image', title: 'Sandeepa Wimalasiri | Cloud & Full-Stack Engineer', images: ['/DSC00078.jpg'] },
@@ -56,7 +72,17 @@ const personJsonLd = {
   image: `${SITE_URL}/DSC00078.jpg`,
   jobTitle: 'Cloud & Full-Stack Engineer',
   nationality: 'Sri Lanka',
-  knowsAbout: ['Cloud Computing', 'Microsoft Azure', 'DevOps', 'Kubernetes', 'Docker', 'Full-Stack Development'],
+  email: 'mailto:agsvwimalasiri@gmail.com',
+  address: { '@type': 'PostalAddress', addressLocality: 'Meepe', addressRegion: 'Western Province', addressCountry: 'LK' },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'SLTC Research University' },
+  knowsAbout: ['Cloud Computing', 'Microsoft Azure', 'AWS', 'DevOps', 'CI/CD', 'Kubernetes', 'Docker', 'Infrastructure as Code', 'Web Development', 'Next.js', 'React', 'Node.js', 'Flutter', 'Full-Stack Development'],
+  makesOffer: [
+    'Website design and development',
+    'Cloud infrastructure setup on Azure and AWS',
+    'DevOps and CI/CD pipelines',
+    'Backend and API development',
+    'Flutter mobile app development',
+  ].map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
   sameAs: [
     'https://github.com/Sandeepa-git',
     'https://www.linkedin.com/in/sandeepa-wimalasiri/',

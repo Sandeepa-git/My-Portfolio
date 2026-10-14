@@ -91,7 +91,7 @@ export function Projects({ as }) {
 export function Services() {
   return (
     <section id="services" className="section">
-      <SectionHead eyebrow="What I Do" title="Services" />
+      <SectionHead eyebrow="What I Do" title="Services" text="Freelance website, cloud and DevOps services for businesses, schools and startups, in Sri Lanka and worldwide." />
       <div className="service-list">
         {services.map((s, i) => (
           <div key={s.title} className="service" data-reveal>

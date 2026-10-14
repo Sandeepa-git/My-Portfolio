@@ -1,8 +1,8 @@
 export const metadata = {
-  title: 'Contact',
-  description: 'Get in touch with Sandeepa Wimalasiri for cloud, DevOps and full-stack development work.',
+  title: 'Hire Me',
+  description: 'Hire Sandeepa Wimalasiri for your website, cloud setup, DevOps pipeline, API or mobile app. Freelance developer in Sri Lanka working with clients worldwide. Replies within 24 hours.',
   alternates: { canonical: '/contact' },
-  openGraph: { title: 'Contact | Sandeepa Wimalasiri', description: 'Get in touch with Sandeepa Wimalasiri for cloud, DevOps and full-stack development work.', url: '/contact' },
+  openGraph: { title: 'Hire Me | Sandeepa Wimalasiri', description: 'Hire Sandeepa Wimalasiri for your website, cloud setup, DevOps pipeline, API or mobile app. Freelance developer in Sri Lanka working with clients worldwide. Replies within 24 hours.', url: '/contact' },
 };
 
 export default function Layout({ children }) {

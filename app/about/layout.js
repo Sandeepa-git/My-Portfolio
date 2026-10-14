@@ -1,8 +1,8 @@
 export const metadata = {
   title: 'About',
-  description: 'About Sandeepa Wimalasiri, Cloud Computing undergraduate and Microsoft Student Ambassador from Sri Lanka: skills in Azure, DevOps, Kubernetes and full-stack development.',
+  description: 'About Sandeepa Wimalasiri, freelance cloud engineer and web developer in Sri Lanka. Services in website development, Azure and AWS cloud, DevOps, CI/CD, APIs and Flutter apps.',
   alternates: { canonical: '/about' },
-  openGraph: { title: 'About | Sandeepa Wimalasiri', description: 'About Sandeepa Wimalasiri, Cloud Computing undergraduate and Microsoft Student Ambassador from Sri Lanka: skills in Azure, DevOps, Kubernetes and full-stack development.', url: '/about' },
+  openGraph: { title: 'About | Sandeepa Wimalasiri', description: 'About Sandeepa Wimalasiri, freelance cloud engineer and web developer in Sri Lanka. Services in website development, Azure and AWS cloud, DevOps, CI/CD, APIs and Flutter apps.', url: '/about' },
 };
 
 export default function Layout({ children }) {
