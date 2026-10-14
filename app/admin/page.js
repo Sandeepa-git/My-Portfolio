@@ -124,6 +124,7 @@ function Editor({ email }) {
   const [notice, setNotice] = useState(null);
   const [busy, setBusy] = useState(false);
   const [confirmLogout, setConfirmLogout] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(null);
   const bodyRef = useRef(null);
 
   const load = () =>
@@ -206,7 +207,7 @@ function Editor({ email }) {
   };
 
   const remove = async (p) => {
-    if (!window.confirm(`Delete "${p.title}"? This cannot be undone.`)) return;
+    setConfirmDelete(null);
     const { error } = await supabase.from('posts').delete().eq('id', p.id);
     if (error) { setMsg({ type: 'error', text: error.message }); return; }
     if (form.id === p.id) setForm(empty);
@@ -233,6 +234,29 @@ function Editor({ email }) {
             <div className="modal-actions">
               <button className="btn btn-sm" autoFocus onClick={() => setConfirmLogout(false)}>Cancel</button>
               <button className="btn btn-sm btn-danger" onClick={() => supabase.auth.signOut()}>Yes, log out</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {confirmDelete && (
+        <div className="modal-backdrop" onClick={() => setConfirmDelete(null)}>
+          <div
+            className="card modal"
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="delete-title"
+            aria-describedby="delete-desc"
+            onClick={(e) => e.stopPropagation()}
+            onKeyDown={(e) => e.key === 'Escape' && setConfirmDelete(null)}
+          >
+            <h2 id="delete-title">Delete post?</h2>
+            <p id="delete-desc">
+              Are you sure you want to delete &ldquo;{confirmDelete.title}&rdquo;? It will be removed from your blog permanently. This cannot be undone.
+            </p>
+            <div className="modal-actions">
+              <button className="btn btn-sm" autoFocus onClick={() => setConfirmDelete(null)}>Cancel</button>
+              <button className="btn btn-sm btn-danger" onClick={() => remove(confirmDelete)}>Yes, delete</button>
             </div>
           </div>
         </div>
@@ -321,7 +345,7 @@ function Editor({ email }) {
             <div className="admin-row">
               {p.published && <a className="btn btn-sm" href={`/blog/${p.slug}`} target="_blank" rel="noopener noreferrer">View</a>}
               <button className="btn btn-sm" onClick={() => edit(p)}>Edit</button>
-              <button className="btn btn-sm" onClick={() => remove(p)}>Delete</button>
+              <button className="btn btn-sm" onClick={() => setConfirmDelete(p)}>Delete</button>
             </div>
           </li>
         ))}
