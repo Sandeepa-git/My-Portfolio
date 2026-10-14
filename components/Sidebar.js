@@ -100,7 +100,7 @@ export default function Sidebar() {
         <ThemeToggle />
       </header>
 
-      {/* Mobile quick section tabs */}
+      {/* Mobile bottom app navigation */}
       <nav className="mobile-section-nav" aria-label="Sections">
         {navItems.map((item) => {
           const isActive = pathname === item.path;
