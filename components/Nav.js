@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Briefcase, User, FileText, Mail } from 'lucide-react';
+import { Home, Briefcase, User, FileText, Mail, BookOpen } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import { WHATSAPP } from '@/lib/content';
 
@@ -12,6 +12,7 @@ const links = [
   { name: 'Work', href: '/#projects', id: 'projects', icon: Briefcase },
   { name: 'About', href: '/#about', id: 'about', icon: User },
   { name: 'Articles', href: '/#articles', id: 'articles', icon: FileText },
+  { name: 'Blog', href: '/blog', id: 'blog', icon: BookOpen },
   { name: 'Contact', href: '/#contact', id: 'contact', icon: Mail },
 ];
 
@@ -54,6 +55,9 @@ export default function Nav() {
     return () => io.disconnect();
   }, [pathname]);
 
+  // The blog editor has its own minimal chrome
+  if (pathname.startsWith('/admin')) return null;
+
   return (
     <>
       <header className={`topnav ${scrolled ? 'scrolled' : ''}`}>
@@ -62,7 +66,7 @@ export default function Nav() {
         </Link>
         <nav className="topnav-links" aria-label="Main">
           {links.slice(1).map((l) => (
-            <a key={l.id} href={l.href} className={active === l.id ? 'active' : ''}>{l.name}</a>
+            <a key={l.id} href={l.href} className={active === l.id || pathname.startsWith(`/${l.id}`) ? 'active' : ''}>{l.name}</a>
           ))}
         </nav>
         <div className="topnav-end">
@@ -85,7 +89,7 @@ export default function Nav() {
 
       <nav className="bottomnav" aria-label="Sections">
         {links.map(({ name, href, id, icon: Icon }) => (
-          <a key={id} href={href} className={active === id ? 'active' : ''} aria-label={name} title={name}>
+          <a key={id} href={href} className={active === id || pathname.startsWith(`/${id}`) ? 'active' : ''} aria-label={name} title={name}>
             <Icon size={20} />
           </a>
         ))}

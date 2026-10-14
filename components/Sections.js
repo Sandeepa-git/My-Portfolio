@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowUpRight, ArrowRight, Plus, MapPin, Clock } from 'lucide-react';
 import { SocialLinks } from './SocialIcons';
@@ -257,6 +258,12 @@ export function Footer() {
   return (
     <footer className="footer">
       <p>© {new Date().getFullYear()} Sandeepa Wimalasiri</p>
+      <nav className="footer-legal" aria-label="Legal">
+        <Link href="/blog">Blog</Link>
+        <Link href="/privacy-policy">Privacy</Link>
+        <Link href="/terms">Terms</Link>
+        <Link href="/disclaimer">Disclaimer</Link>
+      </nav>
       <SocialLinks className="footer-socials" linkClassName="footer-social" size={18} />
     </footer>
   );
