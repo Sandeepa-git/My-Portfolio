@@ -119,9 +119,10 @@ export default function Sidebar() {
               href={item.path}
               className={`mobile-section-link ${isActive ? 'active' : ''}`}
               aria-current={isActive ? 'page' : undefined}
+              aria-label={item.name}
+              title={item.name}
             >
               {item.icon}
-              <span>{item.name}</span>
             </Link>
           );
         })}
