@@ -27,10 +27,10 @@ export function Hero() {
         </div>
         <p className="hero-hey">Hey, I am Sandeepa</p>
         <h1 className="hero-title">
-          Cloud Engineer Building <em>Reliable</em>, Scalable Digital Products
+          Cloud Enthusiast Building <em>Reliable</em>, Scalable Digital Products
         </h1>
         <p className="hero-sub">
-          Freelance web developer and cloud engineer from Sri Lanka. I build fast websites,
+          Freelance web developer and cloud enthusiast from Sri Lanka. I build fast websites,
           online stores, AI chatbots and cloud systems for businesses worldwide.
         </p>
         <div className="hero-actions">
@@ -137,7 +137,7 @@ export function About({ as }) {
             <Image src="/DSC00078.jpg" alt="" width={64} height={64} className="about-avatar" />
             <div>
               <h3>Sandeepa Wimalasiri</h3>
-              <p className="muted">Cloud &amp; Full-Stack Engineer · Sri Lanka</p>
+              <p className="muted">Cloud &amp; Full-Stack Enthusiast · Sri Lanka</p>
             </div>
           </div>
           <p>

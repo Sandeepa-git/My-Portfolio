@@ -22,10 +22,10 @@ export const metadata = {
   alternates: { canonical: '/' },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
   title: {
-    default: 'Sandeepa Wimalasiri | Freelance Web Developer & Cloud Engineer, Sri Lanka',
+    default: 'Sandeepa Wimalasiri | Freelance Web Developer & Cloud Enthusiast, Sri Lanka',
     template: '%s | Sandeepa Wimalasiri',
   },
-  description: 'Sandeepa Wimalasiri is a freelance cloud engineer and web developer in Sri Lanka. Hire me for websites, online stores, AI chatbots, Telegram bots, Azure and AWS cloud setup, DevOps, APIs and Flutter apps.',
+  description: 'Sandeepa Wimalasiri is a freelance web developer and cloud enthusiast in Sri Lanka. Hire me for websites, online stores, AI chatbots, Telegram bots, Azure and AWS cloud setup, DevOps, APIs and Flutter apps.',
   keywords: [
     // Name
     'Sandeepa Wimalasiri', 'Sandeepa', 'Sandeepa Vimukthi', 'Sandeepa Wimalasiri portfolio',
@@ -55,11 +55,11 @@ export const metadata = {
     url: '/',
     siteName: 'Sandeepa Wimalasiri',
     locale: 'en_US',
-    title: 'Sandeepa Wimalasiri | Cloud & Full-Stack Engineer',
-    description: 'Freelance cloud engineer and web developer in Sri Lanka: websites, cloud setup, DevOps, APIs and mobile apps.',
+    title: 'Sandeepa Wimalasiri | Cloud & Full-Stack Enthusiast',
+    description: 'Freelance web developer and cloud enthusiast in Sri Lanka: websites, cloud setup, DevOps, APIs and mobile apps.',
     images: [{ url: '/DSC00078.jpg', alt: 'Sandeepa Wimalasiri' }],
   },
-  twitter: { card: 'summary_large_image', title: 'Sandeepa Wimalasiri | Cloud & Full-Stack Engineer', images: ['/DSC00078.jpg'] },
+  twitter: { card: 'summary_large_image', title: 'Sandeepa Wimalasiri | Cloud & Full-Stack Enthusiast', images: ['/DSC00078.jpg'] },
 };
 
 export const viewport = {
@@ -75,7 +75,7 @@ const personJsonLd = {
   name: 'Sandeepa Wimalasiri',
   url: SITE_URL,
   image: `${SITE_URL}/DSC00078.jpg`,
-  jobTitle: 'Cloud & Full-Stack Engineer',
+  jobTitle: 'Cloud & Full-Stack Enthusiast',
   nationality: 'Sri Lanka',
   email: 'mailto:agsvwimalasiri@gmail.com',
   address: { '@type': 'PostalAddress', addressLocality: 'Meepe', addressRegion: 'Western Province', addressCountry: 'LK' },
