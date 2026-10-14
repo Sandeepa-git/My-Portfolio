@@ -714,8 +714,8 @@ button {
   background: linear-gradient(135deg, var(--accent-color), var(--accent-hover), var(--accent-color));
   background-size: 300% 300%;
   animation: border-dance 6s linear infinite, pulse-glow-ring 4s ease-in-out infinite alternate;
-  width: 292px;
-  height: 292px;
+  width: 242px;
+  height: 242px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -738,8 +738,8 @@ button {
 
 .portrait-frame {
   position: relative;
-  width: 280px;
-  height: 280px;
+  width: 230px;
+  height: 230px;
   border-radius: 50%;
   overflow: hidden;
   border: 4px solid var(--bg-color);

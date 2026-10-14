@@ -66,8 +66,8 @@ export default function Home() {
               <Image 
                 src="/DSC00078.jpg" 
                 alt="Portrait of Sandeepa Wimalasiri" 
-                width={280}
-                height={280}
+                width={230}
+                height={230}
                 priority
               />
             </div>
