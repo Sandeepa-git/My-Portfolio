@@ -109,6 +109,24 @@ export default function Sidebar() {
         </button>
       </header>
 
+      {/* Mobile quick section tabs */}
+      <nav className="mobile-section-nav" aria-label="Sections">
+        {navItems.map((item) => {
+          const isActive = pathname === item.path;
+          return (
+            <Link
+              key={item.name}
+              href={item.path}
+              className={`mobile-section-link ${isActive ? 'active' : ''}`}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {item.icon}
+              <span>{item.name}</span>
+            </Link>
+          );
+        })}
+      </nav>
+
       <div 
         className={`sidebar-overlay ${isOpen ? 'active' : ''}`} 
         onClick={() => setIsOpen(false)}
