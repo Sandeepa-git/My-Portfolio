@@ -133,6 +133,19 @@ function Editor({ email }) {
     });
   useEffect(() => { load(); }, []);
 
+  // Live read counts and edits from Supabase Realtime
+  useEffect(() => {
+    const channel = supabase
+      .channel('admin-posts')
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'posts' }, ({ new: row }) => {
+        setPosts((list) => list.map((p) => (p.id === row.id ? { ...p, ...row } : p)));
+      })
+      .subscribe();
+    return () => { supabase.removeChannel(channel); };
+  }, []);
+
+  const totalViews = posts.reduce((sum, p) => sum + (p.views ?? 0), 0);
+
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }));
 
   const edit = (p) => { setNotice(null); setForm({ ...p, tags: p.tags.join(', '), cover_image: p.cover_image || '' }); setMsg(null); window.scrollTo(0, 0); };
@@ -334,13 +347,13 @@ function Editor({ email }) {
         <Alert msg={msg} onClose={() => setMsg(null)} />
       </form>
 
-      <h2 className="admin-list-title">All posts</h2>
+      <h2 className="admin-list-title">All posts <span className="post-meta">· {totalViews.toLocaleString()} total reads · live</span></h2>
       <ul className="admin-list">
         {posts.map((p) => (
           <li key={p.id} className="card">
             <div>
               <strong>{p.title}</strong>
-              <span className="post-meta"> · {p.published ? 'Published' : 'Draft'} · {p.date}</span>
+              <span className="post-meta"> · {p.published ? 'Published' : 'Draft'} · {p.date} · {(p.views ?? 0).toLocaleString()} reads</span>
             </div>
             <div className="admin-row">
               {p.published && <a className="btn btn-sm" href={`/blog/${p.slug}`} target="_blank" rel="noopener noreferrer">View</a>}

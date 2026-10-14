@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getPosts, getPost, relatedPosts, formatDate } from '@/lib/posts';
 import { SITE_URL } from '@/lib/site';
 import AdSlot from '@/components/AdSlot';
+import ViewCounter from '@/components/ViewCounter';
 
 // New posts from Supabase appear without a redeploy
 export const revalidate = 60;
@@ -86,7 +87,7 @@ export default async function PostPage({ params }) {
           {post.updatedAt && post.updatedAt.slice(0, 10) > post.date && (
             <> · Updated <time dateTime={post.updatedAt}>{formatDate(post.updatedAt)}</time></>
           )}
-          {' '}· {post.readingTime} min read
+          {' '}· {post.readingTime} min read · <ViewCounter slug={post.slug} initial={post.views ?? 0} track />
         </p>
         {post.coverImage && (
           <Image src={post.coverImage} alt={post.title} width={1600} height={900} priority className="post-cover" />

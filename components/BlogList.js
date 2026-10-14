@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { formatDate } from '@/lib/posts';
+import ViewCounter from './ViewCounter';
 
 const pageHref = (n) => (n === 1 ? '/blog' : `/blog/page/${n}`);
 
@@ -25,7 +26,7 @@ export default function BlogList({ posts, page, totalPages }) {
               </div>
               <h2>{p.title}</h2>
               <p>{p.description}</p>
-              <span className="post-meta">{formatDate(p.date)} · {p.readingTime} min read</span>
+              <span className="post-meta">{formatDate(p.date)} · {p.readingTime} min read · <ViewCounter slug={p.slug} initial={p.views ?? 0} /></span>
             </Link>
           ))}
         </div>
