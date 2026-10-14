@@ -1,6 +1,7 @@
 "use client";
 
-import { Mail, MapPin, Clock, Lock } from 'lucide-react';
+import { useState } from 'react';
+import { Mail, MapPin, Clock, Lock, Copy, Check } from 'lucide-react';
 
 const WhatsAppIcon = ({ size }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -10,6 +11,17 @@ const WhatsAppIcon = ({ size }) => (
 
 export default function Contact() {
   const emailAddress = "agsvwimalasiri@gmail.com";
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(emailAddress);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${emailAddress}`;
+    }
+  };
 
   return (
     <div className="content-frame" style={{ maxWidth: '640px', margin: '0 auto' }}>
@@ -30,6 +42,15 @@ export default function Contact() {
             <h4>Email Address</h4>
             <a href={`mailto:${emailAddress}`}>{emailAddress}</a>
           </div>
+          <button
+            type="button"
+            onClick={copyEmail}
+            className="copy-btn"
+            aria-label={copied ? 'Email address copied' : 'Copy email address'}
+          >
+            {copied ? <Check size={16} /> : <Copy size={16} />}
+            <span aria-live="polite">{copied ? 'Copied' : 'Copy'}</span>
+          </button>
         </div>
 
         {/* WhatsApp direct card */}
@@ -39,7 +60,7 @@ export default function Contact() {
           </div>
           <div className="contact-card-details">
             <h4>WhatsApp Direct</h4>
-            <a href="https://wa.me/94750997715" target="_blank" rel="noreferrer" style={{ fontWeight: '600', color: '#25D366' }}>
+            <a href="https://wa.me/94750997715" target="_blank" rel="noopener noreferrer" style={{ fontWeight: '600', color: '#25D366' }}>
               Chat with me directly
             </a>
           </div>
@@ -65,7 +86,7 @@ export default function Contact() {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.825rem', color: 'var(--text-color-muted)' }}>
           <Lock size={14} style={{ color: 'var(--accent-color)' }} />
-          <span>Privacy notice: Your coordinates are strictly confidential.</span>
+          <span>Your details stay private and are never shared.</span>
         </div>
       </div>
     </div>
