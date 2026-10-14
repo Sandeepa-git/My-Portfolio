@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Sun, Moon } from 'lucide-react';
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState('light');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -16,8 +16,8 @@ export default function ThemeToggle() {
       setTheme(savedTheme);
       document.documentElement.setAttribute('data-theme', savedTheme);
     } else {
-      // Default to dark
-      document.documentElement.setAttribute('data-theme', 'dark');
+      // Default to light
+      document.documentElement.setAttribute('data-theme', 'light');
     }
   }, []);
 
@@ -38,7 +38,7 @@ export default function ThemeToggle() {
       aria-label="Toggle Theme"
       title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
     >
-      {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+      {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
     </button>
   );
 }

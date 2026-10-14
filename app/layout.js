@@ -1,19 +1,18 @@
-import { Outfit, JetBrains_Mono } from 'next/font/google';
+import { Plus_Jakarta_Sans, Bricolage_Grotesque } from 'next/font/google';
 import './globals.css';
-import Sidebar from '@/components/Sidebar';
+import Nav from '@/components/Nav';
+import { Footer } from '@/components/Sections';
 import { SITE_URL } from '@/lib/site';
 
-const outfit = Outfit({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-primary-next',
+  variable: '--font-sans',
   display: 'swap',
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-mono-next',
+  variable: '--font-display',
   display: 'swap',
 });
 
@@ -44,7 +43,7 @@ export const metadata = {
 
 export const viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: light)', color: '#fafaf7' },
     { media: '(prefers-color-scheme: dark)', color: '#0b0d12' },
   ],
 };
@@ -68,19 +67,22 @@ const personJsonLd = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${outfit.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${jakarta.variable} ${bricolage.variable}`}>
       <body>
+        <script
+          dangerouslySetInnerHTML={{ __html: "try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}" }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
         <a href="#main-content" className="skip-link">Skip to content</a>
-        <div className="layout">
-          <Sidebar />
-          <main id="main-content" className="main-content" tabIndex={-1}>
-            {children}
-          </main>
-        </div>
+        <Nav />
+        <main id="main-content" tabIndex={-1}>
+          <span id="top" />
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
