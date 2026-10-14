@@ -25,7 +25,7 @@ export const metadata = {
     default: 'Sandeepa Wimalasiri | Freelance Web Developer & Cloud Engineer, Sri Lanka',
     template: '%s | Sandeepa Wimalasiri',
   },
-  description: 'Sandeepa Wimalasiri is a freelance cloud engineer and web developer in Sri Lanka. Hire me for website design and development, Azure and AWS cloud setup, DevOps, CI/CD, APIs and Flutter mobile apps.',
+  description: 'Sandeepa Wimalasiri is a freelance cloud engineer and web developer in Sri Lanka. Hire me for websites, online stores, AI chatbots, Telegram bots, Azure and AWS cloud setup, DevOps, APIs and Flutter apps.',
   keywords: [
     // Name
     'Sandeepa Wimalasiri', 'Sandeepa', 'Sandeepa Vimukthi', 'Sandeepa Wimalasiri portfolio',
@@ -37,9 +37,14 @@ export const metadata = {
     // Cloud & DevOps services
     'Azure cloud engineer', 'AWS cloud setup', 'cloud migration', 'DevOps consultant', 'CI/CD pipeline setup',
     'Docker and Kubernetes', 'Infrastructure as Code', 'Azure Bicep', 'Jenkins pipeline',
+    // AI, bots & e-commerce
+    'AI chatbot development', 'Telegram bot developer', 'WhatsApp ordering website', 'custom chatbot for business',
+    'Microsoft Foundry developer', 'AI assistant for website', 'e-commerce website developer', 'online store development',
+    'Next.js website development', 'website redesign', 'website maintenance', 'SEO friendly website',
     // Location
     'web developer Sri Lanka', 'freelance web developer Sri Lanka', 'cloud engineer Sri Lanka',
-    'DevOps engineer Sri Lanka', 'web design Colombo', 'remote developer Sri Lanka',
+    'DevOps engineer Sri Lanka', 'web design Colombo', 'remote developer Sri Lanka', 'website design Sri Lanka', 'web developer Kandy', 'web developer Galle',
+    'hire developer from Sri Lanka', 'freelance developer Europe',
     // Profile
     'Microsoft Student Ambassador', 'Full-Stack Developer', 'Cloud Engineer portfolio',
   ],
@@ -82,6 +87,8 @@ const personJsonLd = {
     'DevOps and CI/CD pipelines',
     'Backend and API development',
     'Flutter mobile app development',
+    'AI chatbots and Telegram bots',
+    'E-commerce and online store websites',
   ].map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
   sameAs: [
     'https://github.com/Sandeepa-git',

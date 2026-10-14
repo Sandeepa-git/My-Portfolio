@@ -30,8 +30,8 @@ export function Hero() {
           Cloud Engineer Building <em>Reliable</em>, Scalable Digital Products
         </h1>
         <p className="hero-sub">
-          Cloud Computing undergraduate and Associate Microsoft Student Ambassador shipping
-          web apps, APIs and automated deployment pipelines.
+          Freelance web developer and cloud engineer from Sri Lanka. I build fast websites,
+          online stores, AI chatbots and cloud systems for businesses worldwide.
         </p>
         <div className="hero-actions">
           <a href="/#contact" className="btn btn-orange">Hire Me</a>
