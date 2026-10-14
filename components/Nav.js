@@ -57,7 +57,7 @@ export default function Nav() {
     <>
       <header className={`topnav ${scrolled ? 'scrolled' : ''}`}>
         <Link href="/" className="brand" aria-label="Sandeepa Wimalasiri, home">
-          Sandeepa<span>.</span>
+          Sandeepa
         </Link>
         <nav className="topnav-links" aria-label="Main">
           {links.slice(1).map((l) => (
