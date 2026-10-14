@@ -39,6 +39,14 @@ async function checkImage(file) {
   if (w < MIN_WIDTH) throw new Error(`Image is only ${w}px wide. Use at least ${MIN_WIDTH}px (e.g. 1600×900).`);
 }
 
+// Tell the server to rebuild the blog pages right away
+async function refreshBlog() {
+  const { data } = await supabase.auth.getSession();
+  const token = data.session?.access_token;
+  if (!token) return;
+  await fetch('/api/revalidate', { method: 'POST', headers: { Authorization: `Bearer ${token}` } }).catch(() => {});
+}
+
 async function uploadImage(file) {
   await checkImage(file);
   const ext = file.name.split('.').pop().toLowerCase();
@@ -48,16 +56,14 @@ async function uploadImage(file) {
   return supabase.storage.from(IMAGE_BUCKET).getPublicUrl(path).data.publicUrl;
 }
 
-const ICONS = { info: 'ℹ️', success: '✅', error: '⚠️' };
-
 function Alert({ msg, onClose }) {
   if (!msg) return null;
   return (
     <div className={`alert alert-${msg.type}`} role={msg.type === 'error' ? 'alert' : 'status'}>
-      <span><span aria-hidden="true">{ICONS[msg.type]} </span>{msg.text}</span>
+      <span>{msg.text}</span>
       {onClose && msg.type !== 'info' && (
         <span className="alert-actions">
-          <button type="button" className="btn btn-sm" onClick={onClose} aria-label="Dismiss">✕</button>
+          <button type="button" className="btn btn-sm" onClick={onClose} aria-label="Dismiss">Dismiss</button>
         </span>
       )}
     </div>
@@ -185,6 +191,7 @@ function Editor({ email }) {
       setMsg({ type: 'error', text: error.code === '23505' ? 'A post with this slug already exists. Change the slug and try again.' : error.message });
       return;
     }
+    await refreshBlog();
     // Clear the form for the next post and show a success banner
     setForm(empty);
     setMsg(null);
@@ -203,6 +210,8 @@ function Editor({ email }) {
     const { error } = await supabase.from('posts').delete().eq('id', p.id);
     if (error) { setMsg({ type: 'error', text: error.message }); return; }
     if (form.id === p.id) setForm(empty);
+    await refreshBlog();
+    setMsg({ type: 'success', text: `"${p.title}" deleted.` });
     load();
   };
 
@@ -238,13 +247,15 @@ function Editor({ email }) {
       {notice && (
         <div className={`alert ${notice.published ? 'alert-success' : 'alert-info'}`} role="status">
           <span>
-            {notice.published
-              ? <>✅ <strong>&ldquo;{notice.title}&rdquo;</strong> {notice.updated ? 'updated' : 'published'}! It appears on the blog within a minute.</>
-              : <>📝 <strong>&ldquo;{notice.title}&rdquo;</strong> saved as a draft. It is not visible on the blog yet.</>}
+            {notice.published ? (
+              <><strong className="alert-title">{notice.updated ? 'Post updated' : 'Post published'}</strong>&ldquo;{notice.title}&rdquo; is now live on your blog.</>
+            ) : (
+              <><strong className="alert-title">Draft saved</strong>&ldquo;{notice.title}&rdquo; is not visible to visitors until you publish it.</>
+            )}
           </span>
           <span className="alert-actions">
             {notice.published && <a className="btn btn-sm" href={`/blog/${notice.slug}`} target="_blank" rel="noopener noreferrer">View post</a>}
-            <button type="button" className="btn btn-sm" onClick={() => setNotice(null)} aria-label="Dismiss">✕</button>
+            <button type="button" className="btn btn-sm" onClick={() => setNotice(null)} aria-label="Dismiss">Dismiss</button>
           </span>
         </div>
       )}

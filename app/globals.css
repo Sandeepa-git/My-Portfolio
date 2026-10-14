@@ -591,3 +591,5 @@ main:focus { outline: none; }
 .alert-actions { display: flex; gap: 0.5rem; margin-left: auto; }
 .alert-actions .btn { color: inherit; background: transparent; border: 1px solid currentColor; padding: 0.35rem 0.8rem; }
 .alert code { font-size: 0.88em; }
+.alert { border-left-width: 4px; }
+.alert-title { display: block; font-weight: 700; margin-bottom: 0.1rem; }
