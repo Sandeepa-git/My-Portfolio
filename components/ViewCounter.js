@@ -13,16 +13,22 @@ export default function ViewCounter({ slug, initial = 0, track = false }) {
     if (!supabase) return;
     let cancelled = false;
 
-    if (track) {
-      const key = `viewed:${slug}`;
-      let seen = false;
-      try { seen = sessionStorage.getItem(key) === '1'; } catch {}
-      if (!seen) {
+    const key = `viewed:${slug}`;
+    let seen = false;
+    try { seen = sessionStorage.getItem(key) === '1'; } catch {}
+
+    if (track && !seen) {
+      supabase.rpc('increment_post_view', { post_slug: slug }).then(({ data, error }) => {
+        if (cancelled || error || typeof data !== 'number') return;
+        // Only remember the read once it has actually been counted
         try { sessionStorage.setItem(key, '1'); } catch {}
-        supabase.rpc('increment_post_view', { post_slug: slug }).then(({ data }) => {
-          if (!cancelled && typeof data === 'number') setViews(data);
-        });
-      }
+        setViews(data);
+      });
+    } else {
+      // Cached pages may hold an old number, so fetch the current one
+      supabase.from('posts').select('views').eq('slug', slug).maybeSingle().then(({ data }) => {
+        if (!cancelled && typeof data?.views === 'number') setViews(data.views);
+      });
     }
 
     const channel = supabase
