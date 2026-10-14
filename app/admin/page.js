@@ -5,7 +5,7 @@ import { supabase, IMAGE_BUCKET } from '@/lib/supabase';
 
 const empty = {
   id: null, slug: '', title: '', description: '', body: '', tags: '',
-  cover_image: '', reading_time: 5, published: false,
+  cover_image: '', reading_time: 5, published: true,
 };
 
 const today = () => new Date().toISOString().slice(0, 10);
@@ -99,6 +99,7 @@ function Editor({ email }) {
   const [posts, setPosts] = useState([]);
   const [form, setForm] = useState(empty);
   const [msg, setMsg] = useState('');
+  const [notice, setNotice] = useState(null);
   const [busy, setBusy] = useState(false);
   const [confirmLogout, setConfirmLogout] = useState(false);
   const bodyRef = useRef(null);
@@ -111,7 +112,7 @@ function Editor({ email }) {
 
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }));
 
-  const edit = (p) => { setForm({ ...p, tags: p.tags.join(', '), cover_image: p.cover_image || '' }); setMsg(''); window.scrollTo(0, 0); };
+  const edit = (p) => { setNotice(null); setForm({ ...p, tags: p.tags.join(', '), cover_image: p.cover_image || '' }); setMsg(''); window.scrollTo(0, 0); };
 
   const onCover = async (e) => {
     const file = e.target.files?.[0];
@@ -165,8 +166,16 @@ function Editor({ email }) {
       : await supabase.from('posts').insert(row).select().single();
     setBusy(false);
     if (error) { setMsg(error.message); return; }
-    setForm({ ...data, tags: data.tags.join(', '), cover_image: data.cover_image || '' });
-    setMsg(data.published ? 'Saved and published. It appears on /blog within a minute.' : 'Saved as draft.');
+    // Clear the form for the next post and show a success banner
+    setForm(empty);
+    setMsg('');
+    setNotice({
+      published: data.published,
+      title: data.title,
+      slug: data.slug,
+      updated: Boolean(form.id),
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     load();
   };
 
@@ -207,7 +216,21 @@ function Editor({ email }) {
         <button className="btn btn-sm" onClick={() => setConfirmLogout(true)}>Log out</button>
       </div>
 
-      <form onSubmit={save} className="card admin-form">
+      {notice && (
+        <div className={`admin-notice ${notice.published ? 'ok' : ''}`} role="status">
+          <span>
+            {notice.published
+              ? <>✅ <strong>&ldquo;{notice.title}&rdquo;</strong> {notice.updated ? 'updated' : 'published'}! It appears on the blog within a minute.</>
+              : <>📝 <strong>&ldquo;{notice.title}&rdquo;</strong> saved as a draft. It is not visible on the blog yet.</>}
+          </span>
+          <span className="admin-row">
+            {notice.published && <a className="btn btn-sm" href={`/blog/${notice.slug}`} target="_blank" rel="noopener noreferrer">View post</a>}
+            <button type="button" className="btn btn-sm" onClick={() => setNotice(null)} aria-label="Dismiss">✕</button>
+          </span>
+        </div>
+      )}
+
+      <form onSubmit={save} className="card admin-form" onChange={() => notice && setNotice(null)}>
         <label>Title<input value={form.title} onChange={(e) => setForm((f) => ({ ...f, title: e.target.value, slug: f.id ? f.slug : slugify(e.target.value) }))} required /></label>
         <label>Slug (URL)<input value={form.slug} onChange={set('slug')} required pattern="[a-z0-9-]+" /></label>
         <label>Description (shown in Google results)<textarea rows={2} value={form.description} onChange={set('description')} maxLength={170} /></label>

@@ -28,8 +28,10 @@ export async function generateMetadata({ params }) {
       description: post.description,
       url: `/blog/${slug}`,
       publishedTime: post.date,
-      ...(post.coverImage && { images: [{ url: post.coverImage }] }),
+      ...(post.updatedAt && { modifiedTime: post.updatedAt }),
     },
+    // Share image comes from ./opengraph-image.js; Twitter falls back to it
+    twitter: { card: 'summary_large_image', title: post.title, description: post.description },
   };
 }
 
@@ -39,27 +41,53 @@ export default async function PostPage({ params }) {
   if (!post) notFound();
   const related = relatedPosts(post, await getPosts());
 
+  const url = `${SITE_URL}/blog/${slug}`;
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.description,
     datePublished: post.date,
-    ...(post.coverImage && { image: post.coverImage }),
+    dateModified: post.updatedAt || post.date,
+    image: post.coverImage || `${url}/opengraph-image`,
+    keywords: post.tags.join(', '),
+    publisher: { '@type': 'Person', name: 'Sandeepa Wimalasiri', url: SITE_URL },
     author: { '@type': 'Person', name: 'Sandeepa Wimalasiri', url: SITE_URL },
-    mainEntityOfPage: `${SITE_URL}/blog/${slug}`,
+    mainEntityOfPage: url,
+  };
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: url },
+    ],
   };
 
   return (
     <div className="page">
       <article className="section post">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <Link href="/blog" className="post-back">← All posts</Link>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+        <nav className="breadcrumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><Link href="/">Home</Link></li>
+            <li><Link href="/blog">Blog</Link></li>
+            <li aria-current="page">{post.title}</li>
+          </ol>
+        </nav>
         <div className="chips">
           {post.tags.map((t) => <span key={t} className="chip chip-accent">{t}</span>)}
         </div>
         <h1 className="blog-title">{post.title}</h1>
-        <p className="post-meta">By Sandeepa Wimalasiri · {formatDate(post.date)} · {post.readingTime} min read</p>
+        <p className="post-meta">
+          By Sandeepa Wimalasiri · <time dateTime={post.date}>{formatDate(post.date)}</time>
+          {post.updatedAt && post.updatedAt.slice(0, 10) > post.date && (
+            <> · Updated <time dateTime={post.updatedAt}>{formatDate(post.updatedAt)}</time></>
+          )}
+          {' '}· {post.readingTime} min read
+        </p>
         {post.coverImage && (
           <Image src={post.coverImage} alt={post.title} width={1600} height={900} priority className="post-cover" />
         )}

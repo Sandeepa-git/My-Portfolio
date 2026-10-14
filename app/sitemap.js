@@ -26,7 +26,7 @@ export default async function sitemap() {
     })),
     ...posts.map((p) => ({
       url: `${SITE_URL}/blog/${p.slug}`,
-      lastModified: new Date(p.date),
+      lastModified: new Date(p.updatedAt || p.date),
       changeFrequency: 'monthly',
       priority: 0.7,
     })),
