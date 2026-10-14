@@ -15,7 +15,7 @@
   --sky-3: #e8f5df;
   --shadow: 0 1px 2px rgba(15, 20, 25, 0.04), 0 8px 24px rgba(15, 20, 25, 0.06);
   --shadow-lg: 0 2px 4px rgba(15, 20, 25, 0.05), 0 20px 48px rgba(15, 20, 25, 0.1);
-  --radius: 22px;
+  --radius: 32px;
   --serif: var(--font-display), system-ui, sans-serif;
   --sans: var(--font-sans), system-ui, sans-serif;
   --max: 1120px;
@@ -70,7 +70,7 @@ main:focus { outline: none; }
 
 .skip-link {
   position: fixed; top: -100px; left: 16px; z-index: 100;
-  background: var(--ink); color: var(--bg); padding: 0.6rem 1rem; border-radius: 10px;
+  background: var(--ink); color: var(--bg); padding: 0.6rem 1rem; border-radius: 999px;
 }
 .skip-link:focus { top: 16px; }
 
@@ -79,7 +79,7 @@ main:focus { outline: none; }
 /* ===== Buttons & chips ===== */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
-  padding: 0.85rem 1.6rem; border-radius: 14px;
+  padding: 0.85rem 1.6rem; border-radius: 999px;
   font-weight: 600; font-size: 0.98rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
@@ -98,7 +98,7 @@ main:focus { outline: none; }
   background: rgba(255, 255, 255, 0.1); color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
-.btn-sm { padding: 0.55rem 1.1rem; font-size: 0.88rem; border-radius: 11px; }
+.btn-sm { padding: 0.55rem 1.1rem; font-size: 0.88rem; border-radius: 999px; }
 
 .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .chip {
@@ -119,7 +119,7 @@ main:focus { outline: none; }
   z-index: 50; width: min(var(--max), calc(100% - 32px));
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   padding: 0.55rem 0.6rem 0.55rem 1.2rem;
-  border-radius: 18px; border: 1px solid transparent;
+  border-radius: 999px; border: 1px solid transparent;
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .topnav.scrolled {
@@ -132,7 +132,7 @@ main:focus { outline: none; }
 .brand span { color: var(--orange); }
 .topnav-links { display: flex; gap: 0.25rem; }
 .topnav-links a {
-  padding: 0.45rem 0.9rem; border-radius: 10px;
+  padding: 0.45rem 0.9rem; border-radius: 999px;
   font-size: 0.92rem; font-weight: 500; color: var(--ink-2);
   transition: color 0.2s ease, background-color 0.2s ease;
 }
@@ -141,7 +141,7 @@ main:focus { outline: none; }
 .topnav-end { display: flex; align-items: center; gap: 0.5rem; }
 
 .theme-toggle-btn {
-  width: 40px; height: 40px; border-radius: 11px;
+  width: 40px; height: 40px; border-radius: 50%;
   display: grid; place-items: center;
   color: var(--ink); border: 1px solid var(--line); background: var(--surface);
   transition: transform 0.2s ease;
@@ -160,14 +160,14 @@ main:focus { outline: none; }
     position: fixed; z-index: 50; left: 50%; transform: translateX(-50%);
     bottom: calc(14px + env(safe-area-inset-bottom));
     width: min(380px, calc(100% - 32px));
-    padding: 0.4rem; border-radius: 20px;
+    padding: 0.4rem; border-radius: 999px;
     background: color-mix(in srgb, var(--surface) 82%, transparent);
     -webkit-backdrop-filter: blur(16px) saturate(170%);
     backdrop-filter: blur(16px) saturate(170%);
     border: 1px solid var(--line); box-shadow: var(--shadow-lg);
   }
   .bottomnav a {
-    flex: 1; height: 48px; border-radius: 14px;
+    flex: 1; height: 48px; border-radius: 999px;
     display: grid; place-items: center; color: var(--ink-2);
     -webkit-tap-highlight-color: transparent;
     transition: color 0.2s ease, background-color 0.25s ease;
@@ -280,7 +280,7 @@ main:focus { outline: none; }
 .project:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 .project-media {
   position: relative; aspect-ratio: 16 / 9; margin: 0.6rem 0.6rem 0;
-  border-radius: 16px; overflow: hidden; background: var(--surface-2);
+  border-radius: 24px; overflow: hidden; background: var(--surface-2);
 }
 .project-media img { object-fit: cover; transition: transform 0.5s ease; }
 .project:hover .project-media img { transform: scale(1.04); }
@@ -289,7 +289,7 @@ main:focus { outline: none; }
 .project h3 { font-size: 1.15rem; font-weight: 600; line-height: 1.3; }
 .project p { font-size: 0.93rem; color: var(--ink-2); }
 .project-arrow {
-  flex: none; width: 34px; height: 34px; border-radius: 10px;
+  flex: none; width: 34px; height: 34px; border-radius: 50%;
   display: grid; place-items: center; background: var(--surface-2);
   transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
@@ -310,10 +310,10 @@ main:focus { outline: none; }
 .stack-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.9rem; }
 .stack-item {
   display: flex; align-items: center; gap: 0.9rem; padding: 0.9rem;
-  background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 999px; box-shadow: var(--shadow);
 }
 .stack-mark {
-  flex: none; width: 48px; height: 48px; border-radius: 13px;
+  flex: none; width: 48px; height: 48px; border-radius: 50%;
   display: grid; place-items: center; font-weight: 700; font-size: 0.95rem;
   background: var(--dark-btn); color: var(--dark-btn-ink);
 }
@@ -345,7 +345,7 @@ main:focus { outline: none; }
 .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
 .process-step { padding: 1.6rem; }
 .process-num {
-  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px;
+  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
   background: var(--orange); color: #fff; font-weight: 700;
 }
 .process-step h3 { font-family: var(--serif); font-weight: 700; font-size: 1.3rem; letter-spacing: -0.02em; margin: 1rem 0 0.3rem; }
@@ -365,7 +365,7 @@ main:focus { outline: none; }
 .article {
   display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: 1.25rem;
   padding: 1.15rem 1.4rem; background: var(--surface); border: 1px solid var(--line);
-  border-radius: 18px; box-shadow: var(--shadow); transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border-radius: 28px; box-shadow: var(--shadow); transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .article:hover { transform: translateX(4px); box-shadow: var(--shadow-lg); }
 .article h3 { font-size: 1.02rem; font-weight: 600; line-height: 1.35; }
@@ -376,7 +376,7 @@ main:focus { outline: none; }
 /* FAQ */
 .faq { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.75rem; }
 .faq details {
-  background: var(--surface); border: 1px solid var(--line); border-radius: 18px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 28px;
   box-shadow: var(--shadow); padding: 0 1.4rem;
 }
 .faq summary {
@@ -392,7 +392,7 @@ main:focus { outline: none; }
 /* Contact CTA */
 .cta {
   position: relative; overflow: hidden; text-align: center;
-  padding: 4.5rem 1.5rem; border-radius: 28px;
+  padding: 4.5rem 1.5rem; border-radius: 40px;
   background:
     radial-gradient(60% 80% at 15% 0%, rgba(251, 133, 0, 0.35), transparent 60%),
     radial-gradient(50% 70% at 100% 100%, rgba(56, 130, 180, 0.35), transparent 60%),
@@ -405,7 +405,7 @@ main:focus { outline: none; }
 .copy-email {
   display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.5rem;
   font-size: 0.92rem; color: rgba(255, 255, 255, 0.8);
-  padding: 0.45rem 0.9rem; border-radius: 10px; border: 1px dashed rgba(255, 255, 255, 0.25);
+  padding: 0.45rem 0.9rem; border-radius: 999px; border: 1px dashed rgba(255, 255, 255, 0.25);
 }
 .copy-email:hover { color: #fff; border-color: rgba(255, 255, 255, 0.5); }
 .cta-meta { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.25rem; font-size: 0.85rem; color: rgba(255, 255, 255, 0.6); }
@@ -419,7 +419,7 @@ main:focus { outline: none; }
 }
 .footer-socials { display: flex; gap: 0.4rem; }
 .footer-social {
-  width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center;
+  width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
   border: 1px solid var(--line); background: var(--surface);
   transition: color 0.2s ease, transform 0.2s ease;
 }
