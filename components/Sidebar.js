@@ -97,16 +97,7 @@ export default function Sidebar() {
         <Link href="/" className="mobile-header-title" aria-label="Sandeepa Wimalasiri Home">
           Sandeepa Wimalasiri
         </Link>
-        <button 
-          ref={toggleBtnRef}
-          className="mobile-nav-toggle-btn"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-          aria-expanded={isOpen}
-          aria-controls="main-sidebar"
-        >
-          {isOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        <ThemeToggle />
       </header>
 
       {/* Mobile quick section tabs */}
