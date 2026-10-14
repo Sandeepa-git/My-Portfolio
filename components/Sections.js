@@ -38,6 +38,14 @@ export function Hero() {
           <a href="/#projects" className="btn btn-dark">See Works</a>
         </div>
         <span className="hero-status"><span className="dot" aria-hidden="true" /> Open to internships &amp; junior roles</span>
+        <a href={MSA_PROFILE} target="_blank" rel="noopener noreferrer" className="msa-badge" aria-label="Microsoft Learn Student Ambassador profile (opens in a new tab)">
+          <span className="ms-logo" aria-hidden="true"><i /><i /><i /><i /></span>
+          <span className="msa-text">
+            <span className="msa-org">Microsoft Learn Student Ambassadors</span>
+            <span className="msa-role">Associate Student Ambassador</span>
+          </span>
+          <ArrowUpRight size={16} className="msa-arrow" aria-hidden="true" />
+        </a>
       </div>
 
       <div className="marquee" aria-label="Credentials">
