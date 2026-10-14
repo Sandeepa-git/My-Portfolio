@@ -1866,7 +1866,7 @@ textarea.form-input-element {
     backdrop-filter: blur(16px) saturate(160%);
     border: 1px solid var(--border-color);
     border-radius: 22px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 24px color-mix(in srgb, var(--accent-color) 18%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 
   .mobile-section-link {
@@ -1899,21 +1899,129 @@ textarea.form-input-element {
 
   .mobile-section-link.active {
     color: var(--accent-color);
-    background-color: color-mix(in srgb, var(--accent-color) 14%, transparent);
+    background: radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--accent-color) 35%, transparent), transparent 70%);
   }
 
   .mobile-section-link.active svg {
-    transform: translateY(-3px);
+    transform: translateY(-2px) scale(1.08);
+    filter: drop-shadow(0 0 6px var(--accent-color)) drop-shadow(0 0 14px color-mix(in srgb, var(--accent-color) 60%, transparent));
+  }
+
+  /* Neon light bar above the active tab */
+  .mobile-section-link.active::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 28%;
+    right: 28%;
+    height: 3px;
+    border-radius: 0 0 4px 4px;
+    background: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color), 0 0 22px var(--accent-color);
+    animation: nav-light-in 0.35s ease-out;
   }
 
   .mobile-section-link.active::after {
     content: '';
     position: absolute;
-    bottom: 7px;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
+    bottom: 6px;
+    width: 14px;
+    height: 2px;
+    border-radius: 2px;
     background-color: var(--accent-color);
     box-shadow: 0 0 8px var(--accent-color);
   }
+
+  @keyframes nav-light-in {
+    from { transform: scaleX(0); opacity: 0; }
+    to { transform: scaleX(1); opacity: 1; }
+  }
+
+  /* Animated neon gradient border */
+  .mobile-section-nav::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(120deg, transparent 10%, var(--accent-color), transparent 45%, color-mix(in srgb, var(--accent-color) 70%, #22d3ee), transparent 90%);
+    background-size: 250% 250%;
+    animation: nav-border-flow 6s linear infinite;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  @keyframes nav-border-flow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 250% 50%; }
+  }
+}
+
+/* ===== Ambient visual layer: aurora glow + tech grid ===== */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::before {
+  background:
+    radial-gradient(40vw 40vw at 15% 10%, color-mix(in srgb, var(--accent-color) 16%, transparent), transparent 70%),
+    radial-gradient(35vw 35vw at 90% 30%, color-mix(in srgb, #8b5cf6 13%, transparent), transparent 70%),
+    radial-gradient(45vw 45vw at 60% 100%, color-mix(in srgb, #22d3ee 10%, transparent), transparent 70%);
+  filter: blur(20px);
+  animation: aurora-drift 22s ease-in-out infinite alternate;
+}
+
+body::after {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--accent-color) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent-color) 7%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 75%);
+}
+
+@keyframes aurora-drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-3%, 2%, 0) scale(1.08); }
+  100% { transform: translate3d(3%, -2%, 0) scale(1); }
+}
+
+.layout {
+  position: relative;
+  z-index: 1;
+}
+
+/* Gradient headings */
+.section-title {
+  background: linear-gradient(100deg, var(--text-color) 30%, var(--accent-color) 70%, #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Glowing, lifting cards */
+.project-card,
+.capability-card,
+.resume-card,
+.contact-form-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.project-card:hover,
+.capability-card:hover,
+.resume-card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent-color) 45%, transparent);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3), 0 0 28px color-mix(in srgb, var(--accent-color) 20%, transparent);
+}
+
+[data-theme='light'] body::before {
+  opacity: 0.7;
 }
