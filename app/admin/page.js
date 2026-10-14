@@ -48,6 +48,22 @@ async function uploadImage(file) {
   return supabase.storage.from(IMAGE_BUCKET).getPublicUrl(path).data.publicUrl;
 }
 
+const ICONS = { info: 'ℹ️', success: '✅', error: '⚠️' };
+
+function Alert({ msg, onClose }) {
+  if (!msg) return null;
+  return (
+    <div className={`alert alert-${msg.type}`} role={msg.type === 'error' ? 'alert' : 'status'}>
+      <span><span aria-hidden="true">{ICONS[msg.type]} </span>{msg.text}</span>
+      {onClose && msg.type !== 'info' && (
+        <span className="alert-actions">
+          <button type="button" className="btn btn-sm" onClick={onClose} aria-label="Dismiss">✕</button>
+        </span>
+      )}
+    </div>
+  );
+}
+
 export default function AdminPage() {
   const [session, setSession] = useState(null);
   const [ready, setReady] = useState(!supabase);
@@ -66,7 +82,7 @@ export default function AdminPage() {
         <span className="eyebrow">Admin</span>
         <h1 className="blog-title">Blog editor</h1>
         {!supabase ? (
-          <p className="admin-msg">Supabase is not configured. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY in <code>.env.local</code>.</p>
+          <p className="alert alert-error">Supabase is not configured. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY in <code>.env.local</code>.</p>
         ) : session ? <Editor email={session.user.email} /> : <Login />}
       </section>
     </div>
@@ -76,13 +92,13 @@ export default function AdminPage() {
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [msg, setMsg] = useState('');
+  const [msg, setMsg] = useState(null);
 
   const submit = async (e) => {
     e.preventDefault();
-    setMsg('Signing in…');
+    setMsg({ type: 'info', text: 'Signing in…' });
     const { error } = await supabase.auth.signInWithPassword({ email, password });
-    setMsg(error ? error.message : '');
+    setMsg(error ? { type: 'error', text: error.message === 'Invalid login credentials' ? 'Wrong email or password. Please try again.' : error.message } : null);
   };
 
   return (
@@ -90,7 +106,7 @@ function Login() {
       <label>Email<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="username" /></label>
       <label>Password<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="current-password" /></label>
       <button className="btn btn-dark" type="submit">Sign in</button>
-      {msg && <p className="admin-msg">{msg}</p>}
+      <Alert msg={msg} />
     </form>
   );
 }
@@ -98,7 +114,7 @@ function Login() {
 function Editor({ email }) {
   const [posts, setPosts] = useState([]);
   const [form, setForm] = useState(empty);
-  const [msg, setMsg] = useState('');
+  const [msg, setMsg] = useState(null);
   const [notice, setNotice] = useState(null);
   const [busy, setBusy] = useState(false);
   const [confirmLogout, setConfirmLogout] = useState(false);
@@ -106,23 +122,23 @@ function Editor({ email }) {
 
   const load = () =>
     supabase.from('posts').select('*').order('date', { ascending: false }).then(({ data, error }) => {
-      if (error) setMsg(error.message); else setPosts(data);
+      if (error) setMsg({ type: 'error', text: error.message }); else setPosts(data);
     });
   useEffect(() => { load(); }, []);
 
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }));
 
-  const edit = (p) => { setNotice(null); setForm({ ...p, tags: p.tags.join(', '), cover_image: p.cover_image || '' }); setMsg(''); window.scrollTo(0, 0); };
+  const edit = (p) => { setNotice(null); setForm({ ...p, tags: p.tags.join(', '), cover_image: p.cover_image || '' }); setMsg(null); window.scrollTo(0, 0); };
 
   const onCover = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    setBusy(true); setMsg('Uploading cover…');
+    setBusy(true); setMsg({ type: 'info', text: 'Uploading cover…' });
     try {
       const url = await uploadImage(file);
       setForm((f) => ({ ...f, cover_image: url }));
-      setMsg('Cover uploaded.');
-    } catch (err) { setMsg(err.message); }
+      setMsg({ type: 'success', text: 'Cover image uploaded.' });
+    } catch (err) { setMsg({ type: 'error', text: err.message }); }
     setBusy(false); e.target.value = '';
   };
 
@@ -131,21 +147,21 @@ function Editor({ email }) {
     const file = e.target.files?.[0];
     if (!file) return;
     const alt = window.prompt('Describe the image (alt text, good for SEO):', '') ?? '';
-    setBusy(true); setMsg('Uploading image…');
+    setBusy(true); setMsg({ type: 'info', text: 'Uploading image…' });
     try {
       const url = await uploadImage(file);
       const tag = `\n<figure><img src="${url}" alt="${escapeAttr(alt)}" loading="lazy" />${alt ? `<figcaption>${escapeAttr(alt)}</figcaption>` : ''}</figure>\n`;
       const el = bodyRef.current;
       const pos = el?.selectionStart ?? form.body.length;
       setForm((f) => ({ ...f, body: f.body.slice(0, pos) + tag + f.body.slice(pos) }));
-      setMsg('Image inserted into body.');
-    } catch (err) { setMsg(err.message); }
+      setMsg({ type: 'success', text: 'Image inserted into the body.' });
+    } catch (err) { setMsg({ type: 'error', text: err.message }); }
     setBusy(false); e.target.value = '';
   };
 
   const save = async (e) => {
     e.preventDefault();
-    setBusy(true); setMsg('Saving…');
+    setBusy(true); setMsg({ type: 'info', text: 'Saving…' });
     // Publish date is set automatically the first time a post goes live
     const prev = posts.find((p) => p.id === form.id);
     const date = form.published && !prev?.published ? today() : (prev?.date ?? today());
@@ -165,10 +181,13 @@ function Editor({ email }) {
       ? await supabase.from('posts').update(row).eq('id', form.id).select().single()
       : await supabase.from('posts').insert(row).select().single();
     setBusy(false);
-    if (error) { setMsg(error.message); return; }
+    if (error) {
+      setMsg({ type: 'error', text: error.code === '23505' ? 'A post with this slug already exists. Change the slug and try again.' : error.message });
+      return;
+    }
     // Clear the form for the next post and show a success banner
     setForm(empty);
-    setMsg('');
+    setMsg(null);
     setNotice({
       published: data.published,
       title: data.title,
@@ -182,7 +201,7 @@ function Editor({ email }) {
   const remove = async (p) => {
     if (!window.confirm(`Delete "${p.title}"? This cannot be undone.`)) return;
     const { error } = await supabase.from('posts').delete().eq('id', p.id);
-    if (error) { setMsg(error.message); return; }
+    if (error) { setMsg({ type: 'error', text: error.message }); return; }
     if (form.id === p.id) setForm(empty);
     load();
   };
@@ -217,13 +236,13 @@ function Editor({ email }) {
       </div>
 
       {notice && (
-        <div className={`admin-notice ${notice.published ? 'ok' : ''}`} role="status">
+        <div className={`alert ${notice.published ? 'alert-success' : 'alert-info'}`} role="status">
           <span>
             {notice.published
               ? <>✅ <strong>&ldquo;{notice.title}&rdquo;</strong> {notice.updated ? 'updated' : 'published'}! It appears on the blog within a minute.</>
               : <>📝 <strong>&ldquo;{notice.title}&rdquo;</strong> saved as a draft. It is not visible on the blog yet.</>}
           </span>
-          <span className="admin-row">
+          <span className="alert-actions">
             {notice.published && <a className="btn btn-sm" href={`/blog/${notice.slug}`} target="_blank" rel="noopener noreferrer">View post</a>}
             <button type="button" className="btn btn-sm" onClick={() => setNotice(null)} aria-label="Dismiss">✕</button>
           </span>
@@ -277,7 +296,7 @@ function Editor({ email }) {
 
         <label className="admin-check"><input type="checkbox" checked={form.published} onChange={set('published')} /> Published</label>
         <button className="btn btn-dark" type="submit" disabled={busy}>{form.id ? 'Update post' : 'Create post'}</button>
-        {msg && <p className="admin-msg" role="status">{msg}</p>}
+        <Alert msg={msg} onClose={() => setMsg(null)} />
       </form>
 
       <h2 className="admin-list-title">All posts</h2>
