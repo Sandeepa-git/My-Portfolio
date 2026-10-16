@@ -35,7 +35,7 @@ export function Hero() {
           online stores, AI chatbots and cloud systems for businesses worldwide.
         </p>
         <div className="hero-actions">
-          <a href="/#contact" className="btn btn-orange">Hire Me</a>
+          <a href="/#contact" className="btn btn-accent">Hire Me</a>
           <a href="/#projects" className="btn btn-dark">See Works</a>
         </div>
         <span className="hero-status"><span className="dot" aria-hidden="true" /> Open to internships &amp; junior roles</span>
@@ -241,7 +241,7 @@ export function Contact({ as: Tag = 'h2' }) {
         <Tag className="cta-title">Let&apos;s Build Something <em>Reliable</em> Together</Tag>
         <p>Have a project, an opportunity or a technical question? I usually reply within 24 hours.</p>
         <div className="hero-actions">
-          <a href={`mailto:${EMAIL}`} className="btn btn-orange">Email Me</a>
+          <a href={`mailto:${EMAIL}`} className="btn btn-accent">Email Me</a>
           <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" className="btn btn-glass">WhatsApp</a>
         </div>
         <CopyEmail email={EMAIL} />

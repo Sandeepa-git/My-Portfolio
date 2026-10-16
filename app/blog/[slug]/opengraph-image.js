@@ -25,12 +25,12 @@ export default async function Image({ params }) {
             padding: '64px 72px',
             background: post?.coverImage
               ? 'linear-gradient(180deg, rgba(12,13,16,0.1) 20%, rgba(12,13,16,0.92) 100%)'
-              : 'radial-gradient(circle at 85% 15%, rgba(251,133,0,0.35), transparent 55%)',
+              : 'radial-gradient(circle at 85% 15%, rgba(22, 163, 74,0.35), transparent 55%)',
           }}
         >
           <div style={{ display: 'flex', gap: 12, marginBottom: 24 }}>
             {(post?.tags ?? []).slice(0, 3).map((t) => (
-              <div key={t} style={{ color: '#fb8500', fontSize: 24, padding: '6px 18px', borderRadius: 999, border: '2px solid rgba(251,133,0,0.5)' }}>{t}</div>
+              <div key={t} style={{ color: '#16a34a', fontSize: 24, padding: '6px 18px', borderRadius: 999, border: '2px solid rgba(22, 163, 74,0.5)' }}>{t}</div>
             ))}
           </div>
           <div style={{ color: '#f2f2ee', fontSize: title.length > 60 ? 56 : 68, fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.02em' }}>
